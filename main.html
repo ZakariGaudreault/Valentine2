@@ -142,11 +142,17 @@
         }, i * 1500);
       }
       var currentdate = new Date(); 
-      var datetime = currentdate.getDate()+4 - currentdate.getDate() + " days and " + (24 - currentdate.getHours()) + "h"
+      var datetime = currentdate.getDate()+3 - currentdate.getDate() + " days and " + (24 - currentdate.getHours()) + "h"
       + (60-currentdate.getMinutes()) + "mins"
       
       imageDisplay.src = './images/image7.gif'; // Change to image7.gif
-      valentineQuestion.textContent = "YIPPIEEEEEEE(I have a gift for you location, will be reveal in   " + datetime; // Change the question text
+      if(currentdate.getDate() < 27){
+      console.log(currentdate.getDate())
+      valentineQuestion.textContent = "YIPPIEEEEEEE(I have a gift for you location, will be reveal in   " + datetime;
+      }
+      else {
+        valentineQuestion.textContent = "The location is behind that mysterious door" + datetime;
+      } // Change the question text
       responseButtons.style.display = 'none'; // Hide both buttons
       confetti(); // Trigger confetti animation
     });
