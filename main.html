@@ -141,9 +141,12 @@
           audio3.play(); // Play the audio
         }, i * 1500);
       }
-
+      var currentdate = new Date(); 
+      var datetime = currentdate.getDate()+4 - currentdate.getDate() + " days and " + (24 - currentdate.getHours()) + "h"
+      + (60-currentdate.getMinutes()) + "mins"
+      
       imageDisplay.src = './images/image7.gif'; // Change to image7.gif
-      valentineQuestion.textContent = "Yayyy!! :3(I have a gift for you at the top of my closet :))) )"; // Change the question text
+      valentineQuestion.textContent = "YIPPIEEEEEEE(I have a gift for you location, will be reveal in   " + datetime; // Change the question text
       responseButtons.style.display = 'none'; // Hide both buttons
       confetti(); // Trigger confetti animation
     });
