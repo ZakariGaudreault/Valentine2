@@ -7,9 +7,9 @@
   <script>
     function validateCode() {
       const enteredCode = document.getElementById('codeInput').value;
-      const correctCode = "4"; 
+      const correctCode = "0420"; 
       if (enteredCode === correctCode) {
-        window.location.href = "index3.html"; 
+        window.location.href = "main.html"; 
       } else {
         alert("Incorrect code. Please try again!");
       }
@@ -61,7 +61,7 @@
   <div class="container">
     <h1>Enter Code</h1>
     <p>Please enter the secret code</p>
-    <p>hint: deriative of 4x</p>
+    <p>Hint: profil:</p>
     <input type="text" id="codeInput" placeholder="Enter the code here">
     <br>
     <button onclick="validateCode()">Submit</button>

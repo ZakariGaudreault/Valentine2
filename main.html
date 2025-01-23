@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentines Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gradient-background {
+      background: linear-gradient(180deg, rgb(247, 95, 163) 0%, rgba(255, 232, 242, 1) 36%, rgb(252, 227, 227) 100%);
+    }
+
+    .bounce2 {
+      animation: bounce2 2s ease infinite;
+    }
+
+    @keyframes bounce2 {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body class="gradient-background">
+  <div class="flex items-center justify-center h-screen">
+    <div class="flex flex-col items-center p-4">
+      <img id="imageDisplay" src="images/asking.png" alt="Cute kitten with " class="rounded-md h-[300px]" style="object-fit: cover;" />
+      <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#bd1e59] my-4">Will you be my Valentine?</h2>
+      <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
+        <button id="yesButton"
+          class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium disabled:pointer-events-none disabled:opacity-50 hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
+          Yes
+        </button>
+        <button id="noButton"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition disabled:pointer-events-none disabled:opacity-50 hover:bg-red-700 h-12 min-w-[75px] w-auto px-4 py-2 bg-red-500 text-white">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    var audio = new Audio('sounds/sad-meow-song.mp3');
+    var audio2 = new Audio('sounds/yippee-tbh.mp3');
+    var audio3 = new Audio('sounds/yippee-tbh.mp3');
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const imageDisplay = document.getElementById('imageDisplay');
+    const valentineQuestion = document.getElementById('valentineQuestion');
+    const responseButtons = document.getElementById('responseButtons');
+  
+    let noClickCount = 0;
+    let buttonHeight = 48; // Starting height in pixels
+    let buttonWidth = 80;
+    let fontSize = 20; // Starting font size in pixels
+    const imagePaths = [
+      "./images/asking.png",
+      "./images/image2.png",
+      "./images/image3.gif",
+      "./images/image4.gif",
+      "./images/image5.gif",
+      "./images/image6.gif",
+      "./images/image7.gif"
+    ];
+  
+    noButton.addEventListener('click', function () {
+      noClickCount++;
+
+      // Play sad audio
+      audio.play();
+      audio.volume = 0.16;
+
+      // Change image and adjust "Yes" button size
+      if (noClickCount < 5) {
+        imageDisplay.src = imagePaths[noClickCount];
+        buttonHeight += 35; // Increase height
+        buttonWidth += 35; // Increase width
+        fontSize += 25; // Increase font size
+        yesButton.style.height = `${buttonHeight}px`;
+        yesButton.style.width = `${buttonWidth}px`;
+        yesButton.style.fontSize = `${fontSize}px`;
+    
+        if(noClickCount <5)
+        noButton.textContent = [
+          "No",
+          "I think you misread right???? :(",
+          "I moved it out of the way just in case :)",
+          "Don't do this to me :(",
+          "You're breaking my heart",
+          "I'm gonna cry...",
+        ][noClickCount];
+      }
+
+      // Handle button movement logic
+      if (noClickCount === 2) {
+        // Move "No" button to the top-left corner on the third click
+        noButton.style.position = "absolute";
+        noButton.style.left = "40px";
+        noButton.style.top = "50px";
+      } else if (noClickCount >2 && noClickCount <6) {
+        // Random position after the third click
+        const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+        const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+        noButton.style.position = "absolute";
+        noButton.style.left = `${randomX}px`;
+        noButton.style.top = `${randomY}px`;
+      }
+      else if (noClickCount >5) {
+        // Random position after the third click
+        const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+        const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+        noButton.style.position = "absolute";
+        noButton.style.left = `${randomX}px`;
+        noButton.style.top = `${randomY}px`;
+        noButton.textContent = "STOP CLICKING ME ALREADY.."
+      }
+      
+      
+    });
+  
+    yesButton.addEventListener('click', () => {
+      audio.pause();
+      audio2.play();
+      audio2.volume = 0.16;
+      audio3.volume = 0.22;
+
+      for (let i = 0; i < 2; i++) {
+        setTimeout(() => {
+          audio2.currentTime = 0; // Restart the audio from the beginning
+          audio2.play(); // Play the audio
+        }, i * 2000); // Delay each playback by 2 seconds per iteration
+        setTimeout(() => {
+          audio3.currentTime = 0; // Restart the audio from the beginning
+          audio3.play(); // Play the audio
+        }, i * 1500);
+      }
+
+      imageDisplay.src = './images/image7.gif'; // Change to image7.gif
+      valentineQuestion.textContent = "Yayyy!! :3"; // Change the question text
+      responseButtons.style.display = 'none'; // Hide both buttons
+      confetti(); // Trigger confetti animation
+    });
+  </script>  
+</body>
+</html>
