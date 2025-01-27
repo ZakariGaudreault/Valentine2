@@ -142,11 +142,11 @@
         }, i * 1500);
       }
       var currentdate = new Date(); 
-      var datetime = currentdate.getDate()+4 - currentdate.getDate() + " days and " + (24 - currentdate.getHours()-1) + "h"
+      var datetime = 28 - currentdate.getDate() + " days and " + (24 - currentdate.getHours()-1) + "h"
       + (60-currentdate.getMinutes()) + "mins"
       
       imageDisplay.src = './images/image7.gif'; // Change to image7.gif
-      if(currentdate.getDate() < 28){
+      if(currentdate.getDate() < 29){
       console.log(currentdate.getDate())
       valentineQuestion.textContent = "YIPPIEEEEEEE(I have a gift for you.. location will be reveal in   " + datetime;
       }
